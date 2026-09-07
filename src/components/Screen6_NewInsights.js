@@ -9,7 +9,7 @@ const INSIGHT_OPTIONS = [
   '特にない',
 ];
 
-export const Screen6_NewInsights = ({ onNext }) => {
+export const Screen6NewInsights = ({ onNext }) => {
   const [selectedInsights, setSelectedInsights] = useState(new Set());
   const [newInterest, setNewInterest] = useState('');
 
