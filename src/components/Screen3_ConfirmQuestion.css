@@ -1,0 +1,123 @@
+.screen-confirm {
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg) 0;
+}
+
+.screen-confirm .container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--spacing-lg);
+}
+
+.screen-confirm .content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.screen-confirm .header {
+  padding: var(--spacing-lg) 0 0 0;
+}
+
+.screen-confirm .logo {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.05em;
+}
+
+.screen-confirm .heading {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.5;
+  text-align: center;
+  margin: var(--spacing-lg) 0;
+}
+
+.screen-confirm .question-display {
+  background: var(--color-white);
+  border: 2px solid var(--color-primary-light);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-md);
+  box-shadow: var(--shadow-md);
+}
+
+.screen-confirm .emoji {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.screen-confirm .question-text {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.screen-confirm .message-box {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg) var(--spacing-md);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.screen-confirm .message-box p {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+.screen-confirm .btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  margin-top: var(--spacing-lg);
+}
+
+.screen-confirm .btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-sm);
+}
+
+.screen-confirm .btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+@media (max-width: 768px) {
+  .screen-confirm .heading {
+    font-size: var(--font-size-lg);
+  }
+
+  .screen-confirm .emoji {
+    font-size: 2.5rem;
+  }
+
+  .screen-confirm .question-text {
+    font-size: var(--font-size-base);
+  }
+
+  .screen-confirm .message-box p {
+    font-size: var(--font-size-sm);
+  }
+}

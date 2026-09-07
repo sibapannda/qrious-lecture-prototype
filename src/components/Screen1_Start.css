@@ -1,0 +1,113 @@
+.screen-start {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.screen-start .container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--spacing-lg);
+}
+
+.screen-start .content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.screen-start .header {
+  padding: var(--spacing-lg) 0;
+}
+
+.screen-start .logo {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-lg);
+}
+
+.screen-start .lecture-info {
+  margin: var(--spacing-xl) 0;
+}
+
+.screen-start .label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-md);
+}
+
+.screen-start .lecture-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.screen-start .description {
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.screen-start .description p {
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.screen-start .btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  margin-top: var(--spacing-lg);
+}
+
+.screen-start .btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-sm);
+}
+
+.screen-start .btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+@media (max-width: 768px) {
+  .screen-start .content {
+    gap: var(--spacing-lg);
+  }
+
+  .screen-start .logo {
+    font-size: 2.5rem;
+  }
+
+  .screen-start .lecture-title {
+    font-size: var(--font-size-xl);
+  }
+
+  .screen-start .description {
+    padding: var(--spacing-md);
+  }
+
+  .screen-start .description p {
+    font-size: var(--font-size-base);
+  }
+}

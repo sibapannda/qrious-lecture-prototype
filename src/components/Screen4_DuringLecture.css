@@ -1,0 +1,149 @@
+.screen-during-lecture {
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  padding: var(--spacing-lg) 0 var(--spacing-xl) 0;
+}
+
+.screen-during-lecture .container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--spacing-lg);
+}
+
+.screen-during-lecture .header {
+  padding: var(--spacing-lg) 0;
+}
+
+.screen-during-lecture .logo {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.05em;
+}
+
+.screen-during-lecture .content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.screen-during-lecture .label {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.screen-during-lecture .question-display-small {
+  background: var(--color-white);
+  border: 2px solid var(--color-primary-light);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.screen-during-lecture .emoji {
+  font-size: 2rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.screen-during-lecture .question-text {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.screen-during-lecture .memo-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-lg) 0;
+}
+
+.screen-during-lecture .memo-label {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.screen-during-lecture .memo-input {
+  padding: var(--spacing-md);
+  font-size: var(--font-size-base);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  color: var(--color-text);
+  resize: vertical;
+  min-height: 150px;
+  background-color: var(--color-white);
+  transition: border-color 0.2s ease;
+}
+
+.screen-during-lecture .memo-input:focus {
+  outline: none;
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.screen-during-lecture .memo-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.screen-during-lecture .btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.screen-during-lecture .btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-sm);
+}
+
+.screen-during-lecture .btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.screen-during-lecture .notice {
+  text-align: center;
+  padding: var(--spacing-md);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-lg);
+}
+
+.screen-during-lecture .notice p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .screen-during-lecture .emoji {
+    font-size: 1.5rem;
+  }
+
+  .screen-during-lecture .question-text {
+    font-size: var(--font-size-xs);
+  }
+
+  .screen-during-lecture .memo-input {
+    min-height: 120px;
+  }
+}
