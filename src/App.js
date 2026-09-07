@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Screen1_Start } from './components/Screen1_Start';
-import { Screen2_SelectQuestion } from './components/Screen2_SelectQuestion';
-import { Screen3_ConfirmQuestion } from './components/Screen3_ConfirmQuestion';
-import { Screen4_DuringLecture } from './components/Screen4_DuringLecture';
-import { Screen5_AfterLecture } from './components/Screen5_AfterLecture';
-import { Screen6_NewInsights } from './components/Screen6_NewInsights';
-import { Screen7_NotFound } from './components/Screen7_NotFound';
+import { Screen1Start } from './components/Screen1_Start';
+import { Screen2SelectQuestion } from './components/Screen2_SelectQuestion';
+import { Screen3ConfirmQuestion } from './components/Screen3_ConfirmQuestion';
+import { Screen4DuringLecture } from './components/Screen4_DuringLecture';
+import { Screen5AfterLecture } from './components/Screen5_AfterLecture';
+import { Screen6NewInsights } from './components/Screen6_NewInsights';
+import { Screen7NotFound } from './components/Screen7_NotFound';
 import './styles/theme.css';
 import './App.css';
 
@@ -14,7 +14,6 @@ function App() {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [lectureNotes, setLectureNotes] = useState('');
   const [lectureAnswer, setLectureAnswer] = useState('');
-  const [insights, setInsights] = useState(null);
 
   const handleScreen1Next = () => {
     setCurrentScreen(2);
@@ -44,7 +43,6 @@ function App() {
   };
 
   const handleScreen6Complete = (data) => {
-    setInsights(data);
     // In a real app, this would submit data to a backend
     // For now, we'll show a completion message
     console.log('Experience completed:', {
@@ -61,58 +59,57 @@ function App() {
     setSelectedQuestion(null);
     setLectureNotes('');
     setLectureAnswer('');
-    setInsights(null);
   };
 
   return (
     <div className="app">
-      {currentScreen === 1 && <Screen1_Start onNext={handleScreen1Next} />}
+      {currentScreen === 1 && <Screen1Start onNext={handleScreen1Next} />}
       
       {currentScreen === 2 && (
-        <Screen2_SelectQuestion
+        <Screen2SelectQuestion
           onSelectQuestion={handleScreen2SelectQuestion}
           onNoQuestionFound={handleScreen2NoQuestionFound}
         />
       )}
       
       {currentScreen === 3 && selectedQuestion && (
-        <Screen3_ConfirmQuestion
+        <Screen3ConfirmQuestion
           selectedQuestion={selectedQuestion}
           onNext={handleScreen3Next}
         />
       )}
       
       {currentScreen === 4 && selectedQuestion && (
-        <Screen4_DuringLecture
+        <Screen4DuringLecture
           selectedQuestion={selectedQuestion}
           onNext={handleScreen4Next}
         />
       )}
       
       {currentScreen === 5 && selectedQuestion && (
-        <Screen5_AfterLecture
+        <Screen5AfterLecture
           selectedQuestion={selectedQuestion}
           onNext={handleScreen5Next}
         />
       )}
       
       {currentScreen === 6 && (
-        <Screen6_NewInsights onNext={handleScreen6Complete} />
+        <Screen6NewInsights onNext={handleScreen6Complete} />
       )}
       
       {currentScreen === 7 && (
-        <Screen7_NotFound onReset={handleReset} />
+        <Screen7NotFound onReset={handleReset} />
       )}
       
       {currentScreen === 8 && (
-        <Screen8_Completed onReset={handleReset} />
+        <Screen8Completed onReset={handleReset} />
       )}
     </div>
   );
 }
 
 // Screen 8: Completed
-const Screen8_Completed = ({ onReset }) => {
+const Screen8Completed = ({ onReset }) => {
   return (
     <div className="screen screen-completed">
       <div className="container">
