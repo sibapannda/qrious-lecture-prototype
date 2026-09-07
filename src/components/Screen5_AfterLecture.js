@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Screen5_AfterLecture.css';
 
-export const Screen5_AfterLecture = ({ selectedQuestion, onNext }) => {
+export const Screen5AfterLecture = ({ selectedQuestion, onNext }) => {
   const [answer, setAnswer] = useState('');
 
   const handleContinue = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Screen1_Start.css';
 
-export const Screen1_Start = ({ onNext }) => {
+export const Screen1Start = ({ onNext }) => {
   return (
     <div className="screen screen-start">
       <div className="container">

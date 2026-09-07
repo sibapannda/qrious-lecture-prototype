@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Screen4_DuringLecture.css';
 
-export const Screen4_DuringLecture = ({ selectedQuestion, onNext }) => {
+export const Screen4DuringLecture = ({ selectedQuestion, onNext }) => {
   const [memo, setMemo] = useState('');
 
   const handleContinue = () => {

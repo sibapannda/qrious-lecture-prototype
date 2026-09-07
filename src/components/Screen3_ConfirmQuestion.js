@@ -1,7 +1,7 @@
 import React from 'react';
 import './Screen3_ConfirmQuestion.css';
 
-export const Screen3_ConfirmQuestion = ({ selectedQuestion, onNext }) => {
+export const Screen3ConfirmQuestion = ({ selectedQuestion, onNext }) => {
   return (
     <div className="screen screen-confirm">
       <div className="container">

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Screen7_NotFound.css';
 
-export const Screen7_NotFound = ({ onReset }) => {
+export const Screen7NotFound = ({ onReset }) => {
   return (
     <div className="screen screen-not-found">
       <div className="container">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { questionSets } from '../data/questions';
 import './Screen2_SelectQuestion.css';
 
-export const Screen2_SelectQuestion = ({ onSelectQuestion, onNoQuestionFound }) => {
+export const Screen2SelectQuestion = ({ onSelectQuestion, onNoQuestionFound }) => {
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
   const [selectedQuestionId, setSelectedQuestionId] = useState(null);
 
