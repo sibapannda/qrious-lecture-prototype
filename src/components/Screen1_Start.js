@@ -1,7 +1,7 @@
 import React from 'react';
 import './Screen1_Start.css';
 
-export const Screen1Start = ({ onNext }) => {
+export const Screen1Start = ({ lecture, onNext }) => {
   return (
     <div className="screen screen-start">
       <div className="container">
@@ -12,14 +12,20 @@ export const Screen1Start = ({ onNext }) => {
 
           <div className="lecture-info">
             <p className="label">今日の講演</p>
-            <h2 className="lecture-title">「半導体から見る、世界のこれから」</h2>
+
+            <h2 className="lecture-title">
+              「{lecture.title}」
+            </h2>
           </div>
 
           <div className="description">
-            <p>「知らない世界にも、<br/>あなたが『ちょっと気になる』<br/>入口があるかも。」</p>
+            <p>{lecture.description}</p>
           </div>
 
-          <button className="btn-primary" onClick={onNext}>
+          <button
+            className="btn-primary"
+            onClick={onNext}
+          >
             気になる問いを探す →
           </button>
         </div>
