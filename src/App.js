@@ -25,45 +25,92 @@ function App() {
   return <RoleSelect />;
 }
 
+/* =========================
+   最初の役割選択画面
+========================= */
+
 const RoleSelect = () => {
   return (
-    <div className="screen">
-      <div className="container">
-        <div className="content">
-          <div className="header">
-            <h1 className="logo">Qrious</h1>
-          </div>
+    <div className="role-select-page">
+      <div className="role-select-container">
 
-          <h2>Qriousをはじめる</h2>
+        <div className="role-select-header">
+          <h1 className="role-select-logo">Qrious</h1>
 
-          <p>
-            講演をつくる人と、
+          <h2 className="role-select-title">
+            「気になる」から、
             <br />
-            講演を聞く人で画面が分かれています。
+            講演はもっと自分ごとになる。
+          </h2>
+
+          <p className="role-select-description">
+            あなたの立場を選んでください
           </p>
+        </div>
+
+        <div className="role-cards">
 
           <button
-            className="btn-primary"
+            className="role-card"
             onClick={() => {
               window.location.href = '/?mode=host';
             }}
           >
-            講演者として使う →
+            <div className="role-icon">🎤</div>
+
+            <div className="role-card-text">
+              <span className="role-card-label">
+                講演者・先生向け
+              </span>
+
+              <strong className="role-card-title">
+                講演をつくる
+              </strong>
+
+              <span className="role-card-description">
+                講演内容を設定して、
+                生徒の「気になる」をつくる
+              </span>
+            </div>
+
+            <span className="role-arrow">→</span>
           </button>
 
           <button
-            className="btn-secondary"
+            className="role-card"
             onClick={() => {
               window.location.href = '/?mode=student';
             }}
           >
-            生徒として参加する
+            <div className="role-icon">🎓</div>
+
+            <div className="role-card-text">
+              <span className="role-card-label">
+                生徒向け
+              </span>
+
+              <strong className="role-card-title">
+                講演に参加する
+              </strong>
+
+              <span className="role-card-description">
+                気になる問いを見つけて、
+                講演を聞いてみる
+              </span>
+            </div>
+
+            <span className="role-arrow">→</span>
           </button>
+
         </div>
       </div>
     </div>
   );
 };
+
+/* =========================
+   講演者側
+========================= */
 
 const HostApp = () => {
   const [publishedLecture, setPublishedLecture] = useState(null);
@@ -97,64 +144,66 @@ const HostApp = () => {
   };
 
   return (
-    <div className="screen">
-      <div className="container">
-        <div className="content">
-          <div className="header">
-            <h1 className="logo">Qrious</h1>
-          </div>
+    <div className="host-published-page">
+      <div className="host-published-card">
 
-          <h2>講演の準備ができました！</h2>
+        <h1 className="host-logo">Qrious</h1>
 
-          <div className="lecture-info">
-            <p className="label">講演タイトル</p>
-            <h3>{publishedLecture.title}</h3>
-          </div>
-
-          <p>
-            下のURLを生徒に共有すると、
-            この講演のQriousを始められます。
-          </p>
-
-          <textarea
-            readOnly
-            value={studentUrl}
-            style={{
-              width: '100%',
-              minHeight: '100px',
-              marginTop: '16px',
-            }}
-          />
-
-          <button
-            className="btn-primary"
-            onClick={copyStudentUrl}
-          >
-            生徒用URLをコピー
-          </button>
-
-          <button
-            className="btn-secondary"
-            onClick={() => {
-              window.location.href = studentUrl;
-            }}
-          >
-            生徒画面をプレビュー →
-          </button>
-
-          <button
-            className="btn-secondary"
-            onClick={() => {
-              setPublishedLecture(null);
-            }}
-          >
-            講演設定をやり直す
-          </button>
+        <div className="host-success-icon">
+          ✓
         </div>
+
+        <h2>講演の準備ができました！</h2>
+
+        <div className="host-lecture-box">
+          <span>講演タイトル</span>
+          <strong>{publishedLecture.title}</strong>
+        </div>
+
+        <p className="host-description">
+          生徒用URLを共有すると、
+          この講演のQriousに参加できます。
+        </p>
+
+        <textarea
+          className="student-url-box"
+          readOnly
+          value={studentUrl}
+        />
+
+        <button
+          className="host-primary-button"
+          onClick={copyStudentUrl}
+        >
+          🔗 生徒用URLをコピー
+        </button>
+
+        <button
+          className="host-secondary-button"
+          onClick={() => {
+            window.location.href = studentUrl;
+          }}
+        >
+          生徒画面をプレビュー →
+        </button>
+
+        <button
+          className="host-text-button"
+          onClick={() => {
+            setPublishedLecture(null);
+          }}
+        >
+          講演設定をやり直す
+        </button>
+
       </div>
     </div>
   );
 };
+
+/* =========================
+   生徒側
+========================= */
 
 const StudentApp = () => {
   const params = new URLSearchParams(window.location.search);
@@ -166,41 +215,60 @@ const StudentApp = () => {
     try {
       lecture = JSON.parse(lectureParam);
     } catch (error) {
-      console.error('講演データを読み込めませんでした', error);
+      console.error(
+        '講演データを読み込めませんでした',
+        error
+      );
     }
   }
 
   if (!lecture) {
     return (
-      <div className="screen">
-        <div className="container">
-          <div className="content">
-            <div className="header">
-              <h1 className="logo">Qrious</h1>
-            </div>
+      <div className="student-empty-page">
+        <div className="student-empty-card">
 
-            <h2>講演がまだ設定されていません</h2>
+          <h1 className="student-empty-logo">
+            Qrious
+          </h1>
 
-            <p>
-              講演者から共有されたQriousのURLを開いてください。
-            </p>
-
-            <button
-              className="btn-secondary"
-              onClick={() => {
-                window.location.href = '/';
-              }}
-            >
-              トップに戻る
-            </button>
+          <div className="student-empty-icon">
+            🔗
           </div>
+
+          <h2>
+            講演がまだ設定されていません
+          </h2>
+
+          <p>
+            講演者・先生から共有された
+            <br />
+            QriousのURLを開いてください。
+          </p>
+
+          <button
+            className="student-back-button"
+            onClick={() => {
+              window.location.href = '/';
+            }}
+          >
+            トップに戻る
+          </button>
+
         </div>
       </div>
     );
   }
 
-  return <StudentExperience lecture={lecture} />;
+  return (
+    <StudentExperience
+      lecture={lecture}
+    />
+  );
 };
+
+/* =========================
+   生徒の講演体験
+========================= */
 
 const StudentExperience = ({ lecture }) => {
   const [currentScreen, setCurrentScreen] = useState(1);
@@ -256,6 +324,7 @@ const StudentExperience = ({ lecture }) => {
 
   return (
     <div className="app">
+
       {currentScreen === 1 && (
         <Screen1Start
           lecture={lecture}
@@ -309,38 +378,45 @@ const StudentExperience = ({ lecture }) => {
           onReset={handleReset}
         />
       )}
+
     </div>
   );
 };
 
+/* =========================
+   完了
+========================= */
+
 const Screen8Completed = ({ onReset }) => {
   return (
-    <div className="screen screen-completed">
-      <div className="container">
-        <div className="content">
-          <div className="header">
-            <h1 className="logo">Qrious</h1>
-          </div>
+    <div className="completed-page">
+      <div className="completed-card">
 
-          <div className="completion-message">
-            <div className="checkmark">✓</div>
+        <h1 className="completed-logo">
+          Qrious
+        </h1>
 
-            <h2>ご参加ありがとうございました！</h2>
-
-            <p>
-              新しい「気になる」を
-              <br />
-              見つけることができましたか？
-            </p>
-          </div>
-
-          <button
-            className="btn-primary"
-            onClick={onReset}
-          >
-            もう一度試す
-          </button>
+        <div className="completed-check">
+          ✓
         </div>
+
+        <h2>
+          ご参加ありがとうございました！
+        </h2>
+
+        <p>
+          新しい「気になる」を
+          <br />
+          見つけることができましたか？
+        </p>
+
+        <button
+          className="completed-button"
+          onClick={onReset}
+        >
+          もう一度試す
+        </button>
+
       </div>
     </div>
   );
