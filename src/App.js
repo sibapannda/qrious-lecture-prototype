@@ -11,16 +11,202 @@ import './styles/theme.css';
 import './App.css';
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState(0);
-  const [lecture, setLecture] = useState(null);
+  const params = new URLSearchParams(window.location.search);
+  const mode = params.get('mode');
+
+  if (mode === 'host') {
+    return <HostApp />;
+  }
+
+  if (mode === 'student') {
+    return <StudentApp />;
+  }
+
+  return <RoleSelect />;
+}
+
+const RoleSelect = () => {
+  return (
+    <div className="screen">
+      <div className="container">
+        <div className="content">
+          <div className="header">
+            <h1 className="logo">Qrious</h1>
+          </div>
+
+          <h2>Qriousをはじめる</h2>
+
+          <p>
+            講演をつくる人と、
+            <br />
+            講演を聞く人で画面が分かれています。
+          </p>
+
+          <button
+            className="btn-primary"
+            onClick={() => {
+              window.location.href = '/?mode=host';
+            }}
+          >
+            講演者として使う →
+          </button>
+
+          <button
+            className="btn-secondary"
+            onClick={() => {
+              window.location.href = '/?mode=student';
+            }}
+          >
+            生徒として参加する
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const HostApp = () => {
+  const [publishedLecture, setPublishedLecture] = useState(null);
+
+  const handleLectureSetup = (lectureData) => {
+    setPublishedLecture(lectureData);
+  };
+
+  if (!publishedLecture) {
+    return (
+      <Screen0LectureSetup
+        onLectureSetup={handleLectureSetup}
+      />
+    );
+  }
+
+  const lectureString = encodeURIComponent(
+    JSON.stringify(publishedLecture)
+  );
+
+  const studentUrl =
+    `${window.location.origin}/?mode=student&lecture=${lectureString}`;
+
+  const copyStudentUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(studentUrl);
+      alert('生徒用URLをコピーしました！');
+    } catch (error) {
+      alert('URLをコピーできませんでした');
+    }
+  };
+
+  return (
+    <div className="screen">
+      <div className="container">
+        <div className="content">
+          <div className="header">
+            <h1 className="logo">Qrious</h1>
+          </div>
+
+          <h2>講演の準備ができました！</h2>
+
+          <div className="lecture-info">
+            <p className="label">講演タイトル</p>
+            <h3>{publishedLecture.title}</h3>
+          </div>
+
+          <p>
+            下のURLを生徒に共有すると、
+            この講演のQriousを始められます。
+          </p>
+
+          <textarea
+            readOnly
+            value={studentUrl}
+            style={{
+              width: '100%',
+              minHeight: '100px',
+              marginTop: '16px',
+            }}
+          />
+
+          <button
+            className="btn-primary"
+            onClick={copyStudentUrl}
+          >
+            生徒用URLをコピー
+          </button>
+
+          <button
+            className="btn-secondary"
+            onClick={() => {
+              window.location.href = studentUrl;
+            }}
+          >
+            生徒画面をプレビュー →
+          </button>
+
+          <button
+            className="btn-secondary"
+            onClick={() => {
+              setPublishedLecture(null);
+            }}
+          >
+            講演設定をやり直す
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const StudentApp = () => {
+  const params = new URLSearchParams(window.location.search);
+  const lectureParam = params.get('lecture');
+
+  let lecture = null;
+
+  if (lectureParam) {
+    try {
+      lecture = JSON.parse(lectureParam);
+    } catch (error) {
+      console.error('講演データを読み込めませんでした', error);
+    }
+  }
+
+  if (!lecture) {
+    return (
+      <div className="screen">
+        <div className="container">
+          <div className="content">
+            <div className="header">
+              <h1 className="logo">Qrious</h1>
+            </div>
+
+            <h2>講演がまだ設定されていません</h2>
+
+            <p>
+              講演者から共有されたQriousのURLを開いてください。
+            </p>
+
+            <button
+              className="btn-secondary"
+              onClick={() => {
+                window.location.href = '/';
+              }}
+            >
+              トップに戻る
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return <StudentExperience lecture={lecture} />;
+};
+
+const StudentExperience = ({ lecture }) => {
+  const [currentScreen, setCurrentScreen] = useState(1);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [lectureNotes, setLectureNotes] = useState('');
   const [lectureAnswer, setLectureAnswer] = useState('');
-
-  const handleScreen0LectureSetup = (lectureData) => {
-    setLecture(lectureData);
-    setCurrentScreen(1);
-  };
 
   const handleScreen1Next = () => {
     setCurrentScreen(2);
@@ -51,6 +237,7 @@ function App() {
 
   const handleScreen6Complete = (data) => {
     console.log('Experience completed:', {
+      lecture,
       question: selectedQuestion,
       notes: lectureNotes,
       answer: lectureAnswer,
@@ -61,8 +248,7 @@ function App() {
   };
 
   const handleReset = () => {
-    setCurrentScreen(0);
-    setLecture(null);
+    setCurrentScreen(1);
     setSelectedQuestion(null);
     setLectureNotes('');
     setLectureAnswer('');
@@ -70,20 +256,14 @@ function App() {
 
   return (
     <div className="app">
-      {currentScreen === 0 && (
-        <Screen0LectureSetup
-          onLectureSetup={handleScreen0LectureSetup}
-        />
-      )}
-
-      {currentScreen === 1 && lecture && (
+      {currentScreen === 1 && (
         <Screen1Start
           lecture={lecture}
           onNext={handleScreen1Next}
         />
       )}
 
-      {currentScreen === 2 && lecture && (
+      {currentScreen === 2 && (
         <Screen2SelectQuestion
           questions={lecture.questions}
           onSelectQuestion={handleScreen2SelectQuestion}
@@ -131,7 +311,7 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 const Screen8Completed = ({ onReset }) => {
   return (
@@ -148,9 +328,9 @@ const Screen8Completed = ({ onReset }) => {
             <h2>ご参加ありがとうございました！</h2>
 
             <p>
-              あなたの体験は記録されました。
+              新しい「気になる」を
               <br />
-              新しい「気になる」を見つけることができましたか？
+              見つけることができましたか？
             </p>
           </div>
 
