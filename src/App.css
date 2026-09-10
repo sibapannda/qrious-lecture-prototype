@@ -1,113 +1,535 @@
-.app {
-  width: 100%;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* =========================
+   ROLE SELECT
+========================= */
+
+.role-select-page {
   min-height: 100vh;
-  background-color: #ffffff;
-}
+  padding: 40px 20px;
 
-.screen {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-lg);
-}
-
-/* Completion Screen */
-.screen-completed {
-  background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.16),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(124, 58, 237, 0.12),
+      transparent 38%
+    ),
+    #f8fafc;
 }
 
-.screen-completed .content {
+.role-select-container {
+  width: 100%;
+  max-width: 850px;
+}
+
+.role-select-header {
+  text-align: center;
+  margin-bottom: 42px;
+}
+
+.role-select-logo {
+  margin: 0 0 30px;
+  color: #172554;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.role-select-title {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 36px;
+  line-height: 1.4;
+  letter-spacing: -1px;
+}
+
+.role-select-description {
+  margin-top: 16px;
+
+  color: #64748b;
+
+  font-size: 15px;
+}
+
+.role-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.role-card {
+  position: relative;
+
+  width: 100%;
+  min-height: 230px;
+
+  padding: 28px;
+
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+
+  text-align: left;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  box-shadow:
+    0 14px 35px
+    rgba(15, 23, 42, 0.06);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.role-card:hover {
+  transform: translateY(-5px);
+
+  border-color: #93c5fd;
+
+  box-shadow:
+    0 22px 45px
+    rgba(37, 99, 235, 0.13);
+}
+
+.role-icon {
+  width: 54px;
+  height: 54px;
+
+  margin-bottom: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eff6ff;
+
+  border-radius: 17px;
+
+  font-size: 27px;
+}
+
+.role-card-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-card-label {
+  margin-bottom: 7px;
+
+  color: #2563eb;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.role-card-title {
+  margin-bottom: 10px;
+
+  color: #0f172a;
+
+  font-size: 24px;
+}
+
+.role-card-description {
+  max-width: 270px;
+
+  color: #64748b;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.role-arrow {
+  position: absolute;
+
+  right: 26px;
+  bottom: 24px;
+
+  color: #2563eb;
+
+  font-size: 24px;
+
+  transition: transform 0.2s ease;
+}
+
+.role-card:hover .role-arrow {
+  transform: translateX(5px);
+}
+
+/* =========================
+   HOST PUBLISHED SCREEN
+========================= */
+
+.host-published-page {
+  min-height: 100vh;
+
+  padding: 40px 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #f8fafc;
+}
+
+.host-published-card {
+  width: 100%;
+  max-width: 600px;
+
+  padding: 32px;
+
+  background: white;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+
+  box-shadow:
+    0 16px 40px
+    rgba(15, 23, 42, 0.07);
+
   text-align: center;
 }
 
-.screen-completed .header {
-  padding: var(--spacing-lg) 0;
+.host-logo {
+  margin: 0 0 30px;
+
+  color: #172554;
+
+  font-size: 30px;
 }
 
-.screen-completed .logo {
-  font-size: var(--font-size-lg);
-  font-weight: 700;
-  color: var(--color-text);
-  letter-spacing: 0.05em;
+.host-success-icon {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  font-size: 30px;
+  font-weight: bold;
 }
 
-.completion-message {
+.host-published-card h2 {
+  margin-bottom: 28px;
+
+  color: #0f172a;
+}
+
+.host-lecture-box {
+  margin-bottom: 20px;
+
+  padding: 18px;
+
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
-  padding: var(--spacing-xl) var(--spacing-lg);
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  gap: 7px;
+
+  background: #f8fafc;
+
+  border-radius: 16px;
+
+  text-align: left;
 }
 
-.checkmark {
-  font-size: 3rem;
-  color: var(--color-success);
-  line-height: 1;
-}
+.host-lecture-box span {
+  color: #64748b;
 
-.completion-message h2 {
-  font-size: var(--font-size-xl);
+  font-size: 12px;
   font-weight: 700;
-  color: var(--color-text);
 }
 
-.completion-message p {
-  font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
-  line-height: 1.6;
+.host-lecture-box strong {
+  color: #0f172a;
+
+  font-size: 18px;
 }
 
-.screen-completed .btn-primary {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  border: none;
-  padding: var(--spacing-md) var(--spacing-lg);
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-  border-radius: var(--radius-md);
+.host-description {
+  color: #64748b;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.student-url-box {
+  width: 100%;
+  min-height: 90px;
+
+  margin: 8px 0 16px;
+
+  padding: 12px;
+
+  border: 1px solid #dbe3f0;
+  border-radius: 12px;
+
+  background: #f8fafc;
+
+  color: #475569;
+
+  font-family: inherit;
+
+  resize: none;
+}
+
+.host-primary-button,
+.host-secondary-button,
+.host-text-button,
+.student-back-button,
+.completed-button {
+  width: 100%;
+
+  margin-top: 10px;
+
+  padding: 14px 18px;
+
+  border-radius: 14px;
+
+  font-size: 15px;
+  font-weight: 700;
+
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: var(--shadow-md);
 }
 
-.screen-completed .btn-primary:active {
-  transform: scale(0.98);
-  box-shadow: var(--shadow-sm);
+.host-primary-button,
+.completed-button {
+  border: none;
+
+  background: #2563eb;
+
+  color: white;
 }
 
-.screen-completed .btn-primary:hover {
-  background-color: var(--color-primary-dark);
+.host-secondary-button,
+.student-back-button {
+  border: 1.5px solid #2563eb;
+
+  background: white;
+
+  color: #2563eb;
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 0 var(--spacing-md);
+.host-text-button {
+  border: none;
+
+  background: transparent;
+
+  color: #64748b;
+}
+
+/* =========================
+   STUDENT EMPTY
+========================= */
+
+.student-empty-page {
+  min-height: 100vh;
+
+  padding: 30px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f8fafc;
+}
+
+.student-empty-card {
+  width: 100%;
+  max-width: 500px;
+
+  padding: 34px;
+
+  text-align: center;
+
+  background: white;
+
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 16px 40px
+    rgba(15, 23, 42, 0.07);
+}
+
+.student-empty-logo {
+  margin: 0 0 34px;
+
+  color: #172554;
+
+  font-size: 30px;
+}
+
+.student-empty-icon {
+  margin-bottom: 18px;
+
+  font-size: 38px;
+}
+
+.student-empty-card h2 {
+  color: #0f172a;
+
+  font-size: 22px;
+}
+
+.student-empty-card p {
+  margin-bottom: 24px;
+
+  color: #64748b;
+
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* =========================
+   COMPLETED
+========================= */
+
+.completed-page {
+  min-height: 100vh;
+
+  padding: 30px 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f8fafc,
+      #eef4ff
+    );
+}
+
+.completed-card {
+  width: 100%;
+  max-width: 480px;
+
+  padding: 34px;
+
+  text-align: center;
+
+  background: white;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 16px 40px
+    rgba(15, 23, 42, 0.08);
+}
+
+.completed-logo {
+  margin: 0 0 32px;
+
+  color: #172554;
+
+  font-size: 28px;
+}
+
+.completed-check {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  border-radius: 50%;
+
+  font-size: 30px;
+}
+
+.completed-card h2 {
+  color: #0f172a;
+}
+
+.completed-card p {
+  color: #64748b;
+
+  line-height: 1.8;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .role-select-page {
+    padding: 24px 16px;
+
+    align-items: flex-start;
   }
 
-  .completion-message {
-    padding: var(--spacing-lg) var(--spacing-md);
+  .role-select-header {
+    margin-top: 35px;
+    margin-bottom: 30px;
   }
 
-  .checkmark {
-    font-size: 2.5rem;
+  .role-select-logo {
+    margin-bottom: 24px;
+
+    font-size: 29px;
   }
 
-  .completion-message h2 {
-    font-size: var(--font-size-lg);
+  .role-select-title {
+    font-size: 27px;
+  }
+
+  .role-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .role-card {
+    min-height: 190px;
+
+    padding: 22px;
+  }
+
+  .role-card-title {
+    font-size: 21px;
+  }
+
+  .host-published-card,
+  .student-empty-card,
+  .completed-card {
+    padding: 24px 20px;
   }
 }
